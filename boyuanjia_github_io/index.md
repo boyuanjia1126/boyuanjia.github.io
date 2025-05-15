@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Boyuan Jia
+title: Home
 ---
 
 <img src="/assets/avatar.jpg" alt="Boyuan Jia" width="160" style="border-radius: 50%;">
