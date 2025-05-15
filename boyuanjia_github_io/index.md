@@ -7,14 +7,14 @@ title: Boyuan Jia
 
 ## Boyuan Jia
 
-PhD student in Information Science at UCLA, working on human-AI interaction and digital futures.
+I'm currently a master student right now in Peking University, supervised by Pro. Pu Yan. Now I' honorly directed by Xiang ‘PhD student in Information Science at UCLA, working on human-AI interaction and digital futures.
 
 ---
 
 ### 🎓 Education
 
 - **Ph.D. in Information Science**, UCLA, 2024–
-- **M.Sc. in Information Science**, Peking University, 2022–2024  
+- **M.Sc. in Information Science**, Peking University, 2022–2025  
 - **B.A. in Information Management**, Wuhan University, 2018–2022
 
 ---
@@ -37,12 +37,10 @@ Human-centered AI, Prompt Literacy, Eye-tracking, AIGC, Digital Humanities
 
 ### 📎 Resume
 
-[Download PDF](resume.pdf)
-
 ---
 
 ### 📬 Contact
 
-- Email: your@email.com  
+- Email: boyuanjia@stu.pku.edu.cn  
 - GitHub: [boyuanjia](https://github.com/boyuanjia)  
-- Google Scholar: [Your Profile](#)
+  
