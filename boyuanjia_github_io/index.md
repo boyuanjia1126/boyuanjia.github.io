@@ -1,22 +1,20 @@
 ---
 layout: default
-title: Home
+title: Boyuan Jia
 ---
 
 <img src="/assets/avatar.jpg" alt="Boyuan Jia" width="160" style="border-radius: 50%;">
 
 ## Boyuan Jia
 
-Hi:) I'm Boyuan Jia, currently a master student in Peking University, supervised by Pro. Pu Yan. This summer Il
-
+PhD student in Information Science at UCLA, working on human-AI interaction and digital futures.
 
 ---
 
 ### 🎓 Education
 
 - **Ph.D. in Information Science**, UCLA, 2024–
-- **M.Sc. in Information Science**, Peking University, 2023–2025
--   
+- **M.Sc. in Information Science**, Peking University, 2022–2024  
 - **B.A. in Information Management**, Wuhan University, 2018–2022
 
 ---
