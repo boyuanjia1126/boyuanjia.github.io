@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Boyuan Jia — Academic Homepage</title>
   <style>
     body {
@@ -14,11 +14,9 @@
       background-color: #fff;
       position: relative;
       overflow-x: hidden;
+      min-height: 100vh;
     }
-    h1, h2 {
-      font-weight: 600;
-      margin-bottom: 0.3em;
-    }
+    h1, h2 { font-weight: 600; margin-bottom: 0.3em; }
     h1 { font-size: 2em; }
     a { color: #0066cc; text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -26,7 +24,7 @@
     .email { color: #444; }
     hr { border: none; border-top: 1px solid #eee; margin: 2em 0; }
 
-    /* 圆形头像 */
+    /* 头像样式 */
     .profile-pic {
       width: 120px;
       height: 120px;
@@ -37,38 +35,39 @@
     }
     .profile-pic:hover { transform: scale(1.05); }
 
-    /* 漂浮星星效果 */
+    /* 🌟漂浮星星样式 */
     .floating-star {
       position: fixed;
+      z-index: 0;
+      font-size: 14px;
+      opacity: 0.8;
       pointer-events: none;
-      z-index: 9999;
-      opacity: 0;
-      animation-name: floatStar;
-      animation-timing-function: linear;
-      animation-fill-mode: forwards;
+      animation: moveStar linear infinite, twinkle ease-in-out infinite;
     }
 
-    @keyframes floatStar {
-      0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    /* 漂浮移动 */
+    @keyframes moveStar {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(var(--move-x), var(--move-y)); }
     }
 
-    /* News 栏目样式 */
-    #news ul li { margin-bottom: 0.5em; }
+    /* 闪烁效果 */
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
 
-    /* 移动端头像自适应 */
+    /* 移动端适配 */
     @media (max-width: 500px) {
       header { flex-direction: column; align-items: center; text-align: center; gap: 15px; }
     }
   </style>
 </head>
-<body>
 
+<body>
   <!-- Header -->
   <header style="display: flex; align-items: center; gap: 20px;">
-    <img src="boyuan.jpg" alt="Boyuan Jia" class="profile-pic">
+    <img src="boyuan.jpg" alt="Boyuan Jia" class="profile-pic" />
     <div>
       <h1>Boyuan Jia</h1>
       <p><strong>Visiting Graduate Student at UCLA</strong></p>
@@ -79,77 +78,84 @@
 
   <hr>
 
-  <!-- ℹ️ About -->
+  <!-- About -->
   <section class="section" id="about">
     <h2>About</h2>
     <p>
-      Currently I am a visiting student at UCLA, and I just graduated from Peking University this summer. I'm honored to be supervised by Xiang 'Anthony' Chen (UCLA), Pu Yan (Peking University) and Xiaoguang Wang (Wuhan University).
-      My research focuses on <strong>human-centered AI</strong> and how <strong>technology impacts society</strong>. 
-      I am particularly interested in understanding how users interact with generative AI systems 
+      Currently I am a visiting student at UCLA, and I just graduated from Peking University this summer.
+      I'm honored to be supervised by Xiang 'Anthony' Chen (UCLA), Pu Yan (Peking University) and Xiaoguang Wang (Wuhan University).
+      My research focuses on <strong>human-centered AI</strong> and how <strong>technology impacts society</strong>.
+      I am particularly interested in understanding how users interact with generative AI systems
       and how their prompt literacy can be supported through cognitive and behavioral signals.
     </p>
   </section>
 
-  <!-- 📰 News -->
+  <!-- News -->
   <section class="section" id="news">
     <h2>News</h2>
     <ul>
-      <li>Nov 2025: Presented my research at ASIS&T 2025 in Washington DC 🎉.</li>
+      <li>Nov 2025: Presented my research at ASIS&T 2025 in Washington DC 🎉</li>
       <li>July 2025: Joined UCLA as a visiting graduate student in Human-Centered AI.</li>
       <li>July 2025: Graduated from Peking University.</li>
     </ul>
   </section>
 
-  <!-- 📚 Publications -->
+  <!-- Publications -->
   <section class="section" id="publications">
     <h2>Publications</h2>
-    <ul>
-      <li>Jia, B., & Hosseinmardi, H. (2025). <em>Understanding Prompt Literacy: Cognitive and Sociocultural Perspectives.</em> In Proceedings of the IC2S2 2025.</li>
-      <li>Jia, B. (2024). <em>AIGC Literacy and User Interaction Patterns.</em> Journal of Digital Humanities Research.</li>
-    </ul>
+    <p>Coming soon...</p>
   </section>
 
   <!-- Contact -->
   <section class="section" id="contact">
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:boyuanjjjj@gmail.com">boyuanjjjj [at] gmail.edu</a></p>
+    <p>Email: <a href="mailto:boyuanjjjj@gmail.com">boyuanjjjj [at] gmail.com</a></p>
     <p>UCLA, Los Angeles, CA, USA</p>
   </section>
 
   <hr>
   <footer>
-    <p style="font-size: 0.9em; color: #777;">
-      © 2025 Boyuan Jia. Last updated November 2025.
-    </p>
+    <p style="font-size: 0.9em; color: #777;">© 2025 Boyuan Jia. Last updated November 2025.</p>
   </footer>
 
-  <!-- JS: 流畅漂浮 ✨ 星星 -->
+  <!-- ✨ 星空脚本 -->
   <script>
-    function createStar() {
-      const star = document.createElement("div");
-      star.className = "floating-star";
-      star.innerText = "✨";
+    document.addEventListener("DOMContentLoaded", () => {
+      const numStars = 40; // 星星数量，可调多一点
+      const colors = ["#E5C6FF", "#FAD02C", "#D8BFFD", "#FFF5C3"];
 
-      // 随机水平位置
-      star.style.left = Math.random() * 100 + "vw";
-      // 随机大小
-      star.style.fontSize = (10 + Math.random() * 15) + "px";
-      // 随机动画持续时间
-      const duration = 8 + Math.random() * 7;
-      star.style.animationDuration = duration + "s";
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement("div");
+        star.className = "floating-star";
+        star.textContent = "✨";
 
-      // 随机颜色：淡紫色或黄色
-      const colors = ["#D8BFFD", "#FAD02C"];
-      star.style.color = colors[Math.floor(Math.random() * colors.length)];
+        // 随机初始位置
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        star.style.left = x + "vw";
+        star.style.top = y + "vh";
 
-      document.body.appendChild(star);
-      // 动画结束后移除
-      setTimeout(() => star.remove(), duration * 1000);
-    }
+        // 随机移动距离
+        const moveX = (Math.random() - 0.5) * 200 + "px";
+        const moveY = (Math.random() - 0.5) * 200 + "px";
+        star.style.setProperty("--move-x", moveX);
+        star.style.setProperty("--move-y", moveY);
 
-    // 每 400ms 生成一颗星
-    setInterval(createStar, 400);
+        // 随机颜色和大小
+        star.style.color = colors[Math.floor(Math.random() * colors.length)];
+        star.style.fontSize = 12 + Math.random() * 20 + "px";
+
+        // 随机动画速度与延迟
+        const moveDuration = 20 + Math.random() * 15 + "s";
+        const twinkleDuration = 2 + Math.random() * 2 + "s";
+        const delay = Math.random() * 10 + "s";
+
+        star.style.animationDuration = `${moveDuration}, ${twinkleDuration}`;
+        star.style.animationDelay = `${delay}, ${delay}`;
+
+        document.body.appendChild(star);
+      }
+    });
   </script>
-
 </body>
 </html>
