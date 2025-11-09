@@ -36,15 +36,18 @@
       transition: transform 0.3s ease;
     }
     .profile-pic:hover { transform: scale(1.05); }
-
-   .floating-star {
+    .floating-star {
       position: fixed;
       pointer-events: none;
       z-index: 9999;
       font-size: 16px;
       opacity: 0;
-      animation: floatStar linear infinite;
+      animation-name: floatStar;
+      animation-timing-function: linear;
+      animation-iteration-count: 1; /* 每颗星动画一次 */
+      animation-fill-mode: forwards; /* 保持动画结束状态 */
     }
+
     @keyframes floatStar {
       0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
       10% { opacity: 1; }
