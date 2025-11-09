@@ -12,33 +12,21 @@
       line-height: 1.6;
       color: #222;
       background-color: #fff;
+      position: relative;
+      overflow-x: hidden;
     }
     h1, h2 {
       font-weight: 600;
       margin-bottom: 0.3em;
     }
-    h1 {
-      font-size: 2em;
-    }
-    a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .section {
-      margin-top: 2.5em;
-    }
-    .email {
-      color: #444;
-    }
-    hr {
-      border: none;
-      border-top: 1px solid #eee;
-      margin: 2em 0;
-    }
-    /* 新增头像样式增强 */
+    h1 { font-size: 2em; }
+    a { color: #0066cc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .section { margin-top: 2.5em; }
+    .email { color: #444; }
+    hr { border: none; border-top: 1px solid #eee; margin: 2em 0; }
+
+    /* 圆形头像 */
     .profile-pic {
       width: 120px;
       height: 120px;
@@ -47,12 +35,34 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       transition: transform 0.3s ease;
     }
-    .profile-pic:hover {
-      transform: scale(1.05);
+    .profile-pic:hover { transform: scale(1.05); }
+
+    /* 漂浮黄紫星星动画 */
+    .floating {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      animation: floatAnimation linear infinite;
+    }
+    @keyframes floatAnimation {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0.5; }
+    }
+
+    /* News 条目图标 */
+    #news ul li::before { content: "📰 "; }
+    #news ul li { margin-bottom: 0.5em; }
+
+    /* 移动端头像自适应 */
+    @media (max-width: 500px) {
+      header { flex-direction: column; align-items: center; text-align: center; gap: 15px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Header -->
   <header style="display: flex; align-items: center; gap: 20px;">
     <img src="boyuan.jpg" alt="Boyuan Jia" class="profile-pic">
     <div>
@@ -65,6 +75,7 @@
 
   <hr>
 
+  <!-- About -->
   <section class="section" id="about">
     <h2>About</h2>
     <p>
@@ -75,6 +86,7 @@
     </p>
   </section>
 
+  <!-- Publications -->
   <section class="section" id="publications">
     <h2>Publications</h2>
     <ul>
@@ -83,6 +95,17 @@
     </ul>
   </section>
 
+  <!-- News -->
+  <section class="section" id="news">
+    <h2>News</h2>
+    <ul>
+      <li><strong>Nov 2025:</strong> Presented my research on prompt literacy at IC2S2 2025.</li>
+      <li><strong>Oct 2025:</strong> Joined UCLA as a visiting graduate student in Human-Centered AI.</li>
+      <li><strong>Sep 2025:</strong> Published a blog post on AI and user experience in digital humanities.</li>
+    </ul>
+  </section>
+
+  <!-- Contact -->
   <section class="section" id="contact">
     <h2>Contact</h2>
     <p>Email: <a href="mailto:boyuan@g.ucla.edu">boyuan [at] g.ucla.edu</a></p>
@@ -95,5 +118,29 @@
       © 2025 Boyuan Jia. Last updated November 2025.
     </p>
   </footer>
+
+  <!-- JS: 漂浮黄紫星星 -->
+  <script>
+    const images = [
+      "star-purple.png" // 你选的淡紫底 + 黄星星图案
+    ];
+
+    function createFloating() {
+      const img = document.createElement("img");
+      img.src = images[Math.floor(Math.random() * images.length)];
+      img.className = "floating";
+
+      img.style.left = Math.random() * 100 + "vw";
+      img.style.animationDuration = (5 + Math.random() * 5) + "s";
+      img.style.width = (15 + Math.random() * 25) + "px";
+      img.style.height = img.style.width;
+
+      document.body.appendChild(img);
+      setTimeout(() => img.remove(), parseFloat(img.style.animationDuration) * 1000);
+    }
+
+    setInterval(createFloating, 800);
+  </script>
+
 </body>
 </html>
