@@ -37,14 +37,15 @@
     }
     .profile-pic:hover { transform: scale(1.05); }
 
-    /* 漂浮黄紫星星动画 */
-    .floating {
+   .floating-star {
       position: fixed;
       pointer-events: none;
       z-index: 9999;
-      animation: floatAnimation linear infinite;
+      font-size: 16px;
+      opacity: 0;
+      animation: floatStar linear infinite;
     }
-    @keyframes floatAnimation {
+    @keyframes floatStar {
       0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
       10% { opacity: 1; }
       100% { transform: translateY(110vh) rotate(360deg); opacity: 0.5; }
@@ -115,29 +116,23 @@
       © 2025 Boyuan Jia. Last updated November 2025.
     </p>
   </footer>
-
-  <!-- JS: 漂浮黄紫星星 -->
   <script>
-    const images = [
-      "star-purple.png" // 你选的淡紫底 + 黄星星图案
-    ];
+    function createStar() {
+      const star = document.createElement("div");
+      star.className = "floating-star";
+      star.innerText = "✨";
 
-    function createFloating() {
-      const img = document.createElement("img");
-      img.src = images[Math.floor(Math.random() * images.length)];
-      img.className = "floating";
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.fontSize = (12 + Math.random() * 20) + "px";
+      star.style.animationDuration = (5 + Math.random() * 5) + "s";
 
-      img.style.left = Math.random() * 100 + "vw";
-      img.style.animationDuration = (5 + Math.random() * 5) + "s";
-      img.style.width = (15 + Math.random() * 25) + "px";
-      img.style.height = img.style.width;
-
-      document.body.appendChild(img);
-      setTimeout(() => img.remove(), parseFloat(img.style.animationDuration) * 1000);
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), parseFloat(star.style.animationDuration) * 1000);
     }
 
-    setInterval(createFloating, 800);
+    setInterval(createStar, 500); // 每 0.5 秒产生一颗星
   </script>
+
 
 </body>
 </html>
