@@ -18,13 +18,13 @@
     }
     h1, h2 { font-weight: 600; margin-bottom: 0.3em; }
     h1 { font-size: 2em; }
-    a { color: #0066cc; text-decoration: none; }
+    a { color: #6A5ACD; text-decoration: none; }
     a:hover { text-decoration: underline; }
     .section { margin-top: 2.5em; }
     .email { color: #444; }
     hr { border: none; border-top: 1px solid #eee; margin: 2em 0; }
 
-    /* 头像样式 */
+    /* 圆形头像 */
     .profile-pic {
       width: 120px;
       height: 120px;
@@ -35,29 +35,26 @@
     }
     .profile-pic:hover { transform: scale(1.05); }
 
-    /* 🌟漂浮星星样式 */
+    /* 🌟 漂浮星星样式 */
     .floating-star {
       position: fixed;
       z-index: 0;
       font-size: 14px;
-      opacity: 0.8;
+      opacity: 0.7;
       pointer-events: none;
       animation: moveStar linear infinite, twinkle ease-in-out infinite;
     }
 
-    /* 漂浮移动 */
     @keyframes moveStar {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(var(--move-x), var(--move-y)); }
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(var(--move-x), var(--move-y)) rotate(360deg); }
     }
 
-    /* 闪烁效果 */
     @keyframes twinkle {
-      0%, 100% { opacity: 0.7; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.3); }
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.2); }
     }
 
-    /* 移动端适配 */
     @media (max-width: 500px) {
       header { flex-direction: column; align-items: center; text-align: center; gap: 15px; }
     }
@@ -65,7 +62,6 @@
 </head>
 
 <body>
-  <!-- Header -->
   <header style="display: flex; align-items: center; gap: 20px;">
     <img src="boyuan.jpg" alt="Boyuan Jia" class="profile-pic" />
     <div>
@@ -78,7 +74,6 @@
 
   <hr>
 
-  <!-- About -->
   <section class="section" id="about">
     <h2>About</h2>
     <p>
@@ -90,7 +85,6 @@
     </p>
   </section>
 
-  <!-- News -->
   <section class="section" id="news">
     <h2>News</h2>
     <ul>
@@ -100,13 +94,11 @@
     </ul>
   </section>
 
-  <!-- Publications -->
   <section class="section" id="publications">
     <h2>Publications</h2>
     <p>Coming soon...</p>
   </section>
 
-  <!-- Contact -->
   <section class="section" id="contact">
     <h2>Contact</h2>
     <p>Email: <a href="mailto:boyuanjjjj@gmail.com">boyuanjjjj [at] gmail.com</a></p>
@@ -121,33 +113,33 @@
   <!-- ✨ 星空脚本 -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const numStars = 40; // 星星数量，可调多一点
-      const colors = ["#E5C6FF", "#FAD02C", "#D8BFFD", "#FFF5C3"];
+      const numStars = 20; // 🌟 稀疏一点
+      const colors = ["#E6DAFA", "#FCEEB5", "#D8C7FF", "#FFF9E6"];
 
       for (let i = 0; i < numStars; i++) {
         const star = document.createElement("div");
         star.className = "floating-star";
         star.textContent = "✨";
 
-        // 随机初始位置
+        // 随机初始位置（全屏分布）
         const x = Math.random() * 100;
         const y = Math.random() * 100;
         star.style.left = x + "vw";
         star.style.top = y + "vh";
 
-        // 随机移动距离
-        const moveX = (Math.random() - 0.5) * 200 + "px";
-        const moveY = (Math.random() - 0.5) * 200 + "px";
+        // 随机移动方向（慢速轻盈）
+        const moveX = (Math.random() - 0.5) * 150 + "px";
+        const moveY = (Math.random() - 0.5) * 150 + "px";
         star.style.setProperty("--move-x", moveX);
         star.style.setProperty("--move-y", moveY);
 
         // 随机颜色和大小
         star.style.color = colors[Math.floor(Math.random() * colors.length)];
-        star.style.fontSize = 12 + Math.random() * 20 + "px";
+        star.style.fontSize = 12 + Math.random() * 18 + "px";
 
-        // 随机动画速度与延迟
-        const moveDuration = 20 + Math.random() * 15 + "s";
-        const twinkleDuration = 2 + Math.random() * 2 + "s";
+        // 动画时长与延迟
+        const moveDuration = 30 + Math.random() * 20 + "s";
+        const twinkleDuration = 3 + Math.random() * 3 + "s";
         const delay = Math.random() * 10 + "s";
 
         star.style.animationDuration = `${moveDuration}, ${twinkleDuration}`;
