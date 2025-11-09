@@ -36,17 +36,24 @@
       transition: transform 0.3s ease;
     }
     .profile-pic:hover { transform: scale(1.05); }
+    ./* 流畅漂浮 ✨ 星星效果 */
     .floating-star {
       position: fixed;
       pointer-events: none;
       z-index: 9999;
-      font-size: 16px;
       opacity: 0;
       animation-name: floatStar;
       animation-timing-function: linear;
-      animation-iteration-count: 1; /* 每颗星动画一次 */
-      animation-fill-mode: forwards; /* 保持动画结束状态 */
+      animation-fill-mode: forwards;
     }
+
+    @keyframes floatStar {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
 
     @keyframes floatStar {
       0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
@@ -119,22 +126,34 @@
       © 2025 Boyuan Jia. Last updated November 2025.
     </p>
   </footer>
+  
   <script>
-    function createStar() {
-      const star = document.createElement("div");
-      star.className = "floating-star";
-      star.innerText = "✨";
+  function createStar() {
+  const star = document.createElement("div");
+  star.className = "floating-star";
+  star.innerText = "✨";
 
-      star.style.left = Math.random() * 100 + "vw";
-      star.style.fontSize = (12 + Math.random() * 20) + "px";
-      star.style.animationDuration = (5 + Math.random() * 5) + "s";
+  // 随机水平位置
+  star.style.left = Math.random() * 100 + "vw";
+  // 随机大小（略小更梦幻）
+  star.style.fontSize = (10 + Math.random() * 15) + "px";
+  // 随机动画持续时间（漂浮慢）
+  const duration = 8 + Math.random() * 7;
+  star.style.animationDuration = duration + "s";
 
-      document.body.appendChild(star);
-      setTimeout(() => star.remove(), parseFloat(star.style.animationDuration) * 1000);
-    }
+  // 随机颜色：淡紫色或黄色
+  const colors = ["#D8BFFD", "#FAD02C"];
+  star.style.color = colors[Math.floor(Math.random() * colors.length)];
 
-    setInterval(createStar, 500); // 每 0.5 秒产生一颗星
+  document.body.appendChild(star);
+  // 动画结束后移除
+  setTimeout(() => star.remove(), duration * 1000);
+}
+
+  // 每 400ms 生成一颗星（比原来慢更优雅）
+  setInterval(createStar, 400);
   </script>
+
 
 
 </body>
