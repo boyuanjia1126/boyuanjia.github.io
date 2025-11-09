@@ -36,7 +36,8 @@
       transition: transform 0.3s ease;
     }
     .profile-pic:hover { transform: scale(1.05); }
-    ./* 流畅漂浮 ✨ 星星效果 */
+
+    /* 漂浮星星效果 */
     .floating-star {
       position: fixed;
       pointer-events: none;
@@ -54,15 +55,7 @@
       100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
-
-    @keyframes floatStar {
-      0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0.5; }
-    }
-
-    /* News 条目图标 */
-    
+    /* News 栏目样式 */
     #news ul li { margin-bottom: 0.5em; }
 
     /* 移动端头像自适应 */
@@ -91,32 +84,35 @@
     <h2>About</h2>
     <p>
       Currently I am a visiting student at UCLA, and I just graduated from Peking University this summer. I'm honored to be supervised by Xiang 'Anthony' Chen (UCLA), Pu Yan (Peking University) and Xiaoguang Wang (Wuhan University).
-      My research focuses on <strong>human-centered AI</strong> and how <strong>techonology impacts on the society</strong>. 
+      My research focuses on <strong>human-centered AI</strong> and how <strong>technology impacts society</strong>. 
       I am particularly interested in understanding how users interact with generative AI systems 
       and how their prompt literacy can be supported through cognitive and behavioral signals.
     </p>
   </section>
 
-
-
   <!-- 📰 News -->
   <section class="section" id="news">
     <h2>News</h2>
     <ul>
-      <li>Nov 2025: Presented my research ASIS&T 2025 in Washington DC 🎉.</li>
-      <li>July 2025:Joined UCLA as a visiting graduate student in Human-Centered AI.</li>
-      <li>July 2025:Graduated from Peking University.</li>
+      <li>Nov 2025: Presented my research at ASIS&T 2025 in Washington DC 🎉.</li>
+      <li>July 2025: Joined UCLA as a visiting graduate student in Human-Centered AI.</li>
+      <li>July 2025: Graduated from Peking University.</li>
     </ul>
   </section>
+
   <!-- 📚 Publications -->
   <section class="section" id="publications">
     <h2>Publications</h2>
+    <ul>
+      <li>Jia, B., & Hosseinmardi, H. (2025). <em>Understanding Prompt Literacy: Cognitive and Sociocultural Perspectives.</em> In Proceedings of the IC2S2 2025.</li>
+      <li>Jia, B. (2024). <em>AIGC Literacy and User Interaction Patterns.</em> Journal of Digital Humanities Research.</li>
     </ul>
   </section>
+
   <!-- Contact -->
   <section class="section" id="contact">
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:boyuanjia@gmail.com">boyuanjjjj [at] gmail.edu</a></p>
+    <p>Email: <a href="mailto:boyuanjjjj@gmail.com">boyuanjjjj [at] gmail.edu</a></p>
     <p>UCLA, Los Angeles, CA, USA</p>
   </section>
 
@@ -126,35 +122,34 @@
       © 2025 Boyuan Jia. Last updated November 2025.
     </p>
   </footer>
-  
+
+  <!-- JS: 流畅漂浮 ✨ 星星 -->
   <script>
-  function createStar() {
-  const star = document.createElement("div");
-  star.className = "floating-star";
-  star.innerText = "✨";
+    function createStar() {
+      const star = document.createElement("div");
+      star.className = "floating-star";
+      star.innerText = "✨";
 
-  // 随机水平位置
-  star.style.left = Math.random() * 100 + "vw";
-  // 随机大小（略小更梦幻）
-  star.style.fontSize = (10 + Math.random() * 15) + "px";
-  // 随机动画持续时间（漂浮慢）
-  const duration = 8 + Math.random() * 7;
-  star.style.animationDuration = duration + "s";
+      // 随机水平位置
+      star.style.left = Math.random() * 100 + "vw";
+      // 随机大小
+      star.style.fontSize = (10 + Math.random() * 15) + "px";
+      // 随机动画持续时间
+      const duration = 8 + Math.random() * 7;
+      star.style.animationDuration = duration + "s";
 
-  // 随机颜色：淡紫色或黄色
-  const colors = ["#D8BFFD", "#FAD02C"];
-  star.style.color = colors[Math.floor(Math.random() * colors.length)];
+      // 随机颜色：淡紫色或黄色
+      const colors = ["#D8BFFD", "#FAD02C"];
+      star.style.color = colors[Math.floor(Math.random() * colors.length)];
 
-  document.body.appendChild(star);
-  // 动画结束后移除
-  setTimeout(() => star.remove(), duration * 1000);
-}
+      document.body.appendChild(star);
+      // 动画结束后移除
+      setTimeout(() => star.remove(), duration * 1000);
+    }
 
-  // 每 400ms 生成一颗星（比原来慢更优雅）
-  setInterval(createStar, 400);
+    // 每 400ms 生成一颗星
+    setInterval(createStar, 400);
   </script>
-
-
 
 </body>
 </html>
