@@ -1,63 +1,264 @@
-<section class="section" id="gallery">
-  <h2>Gallery</h2>
-  <div id="map-container" style="position: relative; max-width: 100%; height: auto;">
-    <!-- 世界地图 SVG -->
-    <svg id="world-map" viewBox="0 0 1000 500" style="width: 100%; height: auto;">
-      <!-- 简化美观的世界轮廓 -->
-      <rect width="1000" height="500" fill="#eef2f7"/>
-      <path d="M..." fill="#c0c0c0"/> <!-- 这里可以替换为完整世界地图SVG路径 -->
-      
-      <!-- 城市标记 -->
-      <text class="city-star" x="500" y="200" data-city="北京" data-image="beijing.jpg">✨</text>
-      <text class="city-star" x="520" y="220" data-city="上海" data-image="shanghai.jpg">✨</text>
-      <text class="city-star" x="480" y="180" data-city="银川" data-image="yinchuan.jpg">✨</text>
-      <text class="city-star" x="100" y="250" data-city="洛杉矶" data-image="losangeles.jpg">✨</text>
-      <text class="city-star" x="730" y="180" data-city="首尔" data-image="seoul.jpg">✨</text>
-      <text class="city-star" x="770" y="200" data-city="东京" data-image="tokyo.jpg">✨</text>
-    </svg>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boyuan Jia — Academic Homepage</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 40px auto;
+      max-width: 900px;
+      line-height: 1.6;
+      color: #222;
+      background-color: #fff;
+      position: relative;
+      overflow-x: hidden;
+    }
+    header { display: flex; align-items: center; gap: 20px; margin-bottom: 20px;}
+    h1, h2 { font-weight: 600; margin-bottom: 0.3em; }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.5em; }
+    a { color: #0066cc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .section { margin-top: 2.5em; }
+    .email { color: #444; }
+    hr { border: none; border-top: 1px solid #eee; margin: 2em 0; }
+    
+    /* 圆形头像 */
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+    .profile-pic:hover { transform: scale(1.05); }
 
-    <!-- 弹窗 -->
-    <div id="popup" style="position: absolute; display: none; background: rgba(255,255,255,0.95); border: 1px solid #ccc; padding: 10px; border-radius: 8px; z-index: 10;">
-      <span id="popup-close" style="cursor:pointer; float:right;">✖</span>
-      <h3 id="popup-title"></h3>
-      <img id="popup-image" src="" alt="" style="max-width:300px; max-height:300px; display:block; margin-top:10px; border-radius:6px;">
+    /* 漂浮星星 */
+    .floating-star {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 16px;
+      opacity: 0;
+      animation-name: floatStar;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+    }
+    @keyframes floatStar {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0.5; }
+    }
+
+    /* 导航 */
+    nav { margin-bottom: 20px; }
+    nav a { margin-right: 15px; font-weight: 500; }
+
+    /* Gallery */
+    #gallery svg { width: 100%; height: auto; border:1px solid #ddd; }
+    .map-point { cursor:pointer; }
+
+    /* Lightbox */
+    #lightbox { display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:2000; }
+    #lightbox-img { max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.4); }
+
+    /* 移动端自适应 */
+    @media (max-width: 600px) {
+      header { flex-direction: column; text-align: center; gap: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="boyuan.jpg" alt="Boyuan Jia" class="profile-pic">
+    <div>
+      <h1>Boyuan Jia</h1>
+      <p><strong>Visiting Graduate Student at UCLA</strong></p>
+      <p style="font-size:0.9em;">Research interests: Human-centered AI, computational social science.</p>
+      <p class="email" style="font-size:0.9em;">Email: boyuan [at] gmail.com</p>
     </div>
-  </div>
-</section>
+  </header>
 
-<style>
-  .city-star {
-    font-size: 24px;
-    fill: #a480ff; /* 紫色 */
-    cursor: pointer;
-  }
-</style>
+  <!-- Navigation -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#news">News</a>
+    <a href="#publications">Publications</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-<script>
-  const stars = document.querySelectorAll('.city-star');
-  const popup = document.getElementById('popup');
-  const popupTitle = document.getElementById('popup-title');
-  const popupImage = document.getElementById('popup-image');
-  const popupClose = document.getElementById('popup-close');
-  const mapContainer = document.getElementById('map-container');
+  <hr>
 
-  stars.forEach(star => {
-    star.addEventListener('click', e => {
-      const city = star.getAttribute('data-city');
-      const img = star.getAttribute('data-image');
-      popupTitle.innerText = city;
-      popupImage.src = img;
-      
-      // 弹窗位置在星星附近
-      const rect = star.getBoundingClientRect();
-      const containerRect = mapContainer.getBoundingClientRect();
-      popup.style.left = (rect.left - containerRect.left + 20) + 'px';
-      popup.style.top = (rect.top - containerRect.top - 10) + 'px';
-      popup.style.display = 'block';
+  <!-- About -->
+  <section class="section" id="about">
+    <h2>About</h2>
+    <p>
+      Currently I am a visiting student at UCLA, and I just graduated from Peking University this summer.
+      I'm honored to be supervised by Xiang 'Anthony' Chen (UCLA), Pu Yan (Peking University) and Xiaoguang Wang (Wuhan University).
+      My research focuses on <strong>human-centered AI</strong> and how <strong>technology impacts society</strong>.
+    </p>
+    <p>
+      <a href="cv.pdf" target="_blank">📄 CV</a> | 
+      <a href="https://github.com/yourgithub" target="_blank">💻 GitHub</a>
+    </p>
+  </section>
+
+  <!-- News -->
+  <section class="section" id="news">
+    <h2>News</h2>
+    <ul>
+      <li>Nov 2025: Presented my research ASIS&T 2025 in Washington DC 🎉.</li>
+      <li>July 2025: Joined UCLA as a visiting graduate student in Human-Centered AI.</li>
+      <li>July 2025: Graduated from Peking University.</li>
+    </ul>
+  </section>
+
+  <!-- Publications -->
+  <section class="section" id="publications">
+    <h2>Publications</h2>
+    <ul>
+      <li>Jia, B., & Hosseinmardi, H. (2025). <em>Understanding Prompt Literacy: Cognitive and Sociocultural Perspectives.</em> IC2S2 2025.</li>
+      <li>Jia, B. (2024). <em>AIGC Literacy and User Interaction Patterns.</em> Journal of Digital Humanities Research.</li>
+    </ul>
+  </section>
+
+  <section class="section" id="gallery">
+    <h2>Gallery</h2>
+    <div id="map-container" style="position: relative; max-width: 100%; height: auto;">
+      <!-- 世界地图 SVG -->
+      <svg id="world-map" viewBox="0 0 1000 500" style="width: 100%; height: auto;">
+        <!-- 简化美观的世界轮廓 -->
+        <rect width="1000" height="500" fill="#eef2f7"/>
+        <path d="M..." fill="#c0c0c0"/> <!-- 这里可以替换为完整世界地图SVG路径 -->
+        
+        <!-- 城市标记 -->
+        <text class="city-star" x="500" y="200" data-city="北京" data-image="beijing.jpg">✨</text>
+        <text class="city-star" x="520" y="220" data-city="上海" data-image="shanghai.jpg">✨</text>
+        <text class="city-star" x="480" y="180" data-city="银川" data-image="yinchuan.jpg">✨</text>
+        <text class="city-star" x="100" y="250" data-city="洛杉矶" data-image="losangeles.jpg">✨</text>
+        <text class="city-star" x="730" y="180" data-city="首尔" data-image="seoul.jpg">✨</text>
+        <text class="city-star" x="770" y="200" data-city="东京" data-image="tokyo.jpg">✨</text>
+      </svg>
+  
+      <!-- 弹窗 -->
+      <div id="popup" style="position: absolute; display: none; background: rgba(255,255,255,0.95); border: 1px solid #ccc; padding: 10px; border-radius: 8px; z-index: 10;">
+        <span id="popup-close" style="cursor:pointer; float:right;">✖</span>
+        <h3 id="popup-title"></h3>
+        <img id="popup-image" src="" alt="" style="max-width:300px; max-height:300px; display:block; margin-top:10px; border-radius:6px;">
+      </div>
+    </div>
+  </section>
+  
+  <style>
+    .city-star {
+      font-size: 24px;
+      fill: #a480ff; /* 紫色 */
+      cursor: pointer;
+    }
+  </style>
+
+  <script>
+    const stars = document.querySelectorAll('.city-star');
+    const popup = document.getElementById('popup');
+    const popupTitle = document.getElementById('popup-title');
+    const popupImage = document.getElementById('popup-image');
+    const popupClose = document.getElementById('popup-close');
+    const mapContainer = document.getElementById('map-container');
+  
+    stars.forEach(star => {
+      star.addEventListener('click', e => {
+        const city = star.getAttribute('data-city');
+        const img = star.getAttribute('data-image');
+        popupTitle.innerText = city;
+        popupImage.src = img;
+        
+        // 弹窗位置在星星附近
+        const rect = star.getBoundingClientRect();
+        const containerRect = mapContainer.getBoundingClientRect();
+        popup.style.left = (rect.left - containerRect.left + 20) + 'px';
+        popup.style.top = (rect.top - containerRect.top - 10) + 'px';
+        popup.style.display = 'block';
+      });
     });
-  });
+  
+    popupClose.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+  </script>
 
-  popupClose.addEventListener('click', () => {
-    popup.style.display = 'none';
-  });
-</script>
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:boyuanjjjj@gmail.com">boyuanjjjj [at] gmail.com</a></p>
+    <p>UCLA, Los Angeles, CA, USA</p>
+  </section>
+
+  <hr>
+  <footer>
+    <p style="font-size: 0.9em; color: #777;">
+      © 2025 Boyuan Jia. Last updated November 2025.
+    </p>
+  </footer>
+
+  <!-- Floating stars -->
+  <script>
+    function createStar() {
+      const star = document.createElement("div");
+      star.className = "floating-star";
+      star.innerText = "✨";
+
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.fontSize = (12 + Math.random() * 20) + "px";
+      star.style.animationDuration = (8 + Math.random() * 5) + "s";
+
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), parseFloat(star.style.animationDuration) * 1000);
+    }
+
+    setInterval(createStar, 600); // 稀疏一些
+  </script>
+
+  <!-- Gallery Lightbox -->
+  <script>
+    const points = document.querySelectorAll(".map-point");
+    const lightbox = document.createElement("div");
+    lightbox.id = "lightbox";
+    lightbox.style.display = "none";
+    lightbox.style.position = "fixed";
+    lightbox.style.top = "0";
+    lightbox.style.left = "0";
+    lightbox.style.width = "100%";
+    lightbox.style.height = "100%";
+    lightbox.style.background = "rgba(0,0,0,0.8)";
+    lightbox.style.justifyContent = "center";
+    lightbox.style.alignItems = "center";
+    lightbox.style.zIndex = "2000";
+    lightbox.style.display = "flex";
+    lightbox.innerHTML = '<img id="lightbox-img" style="max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.4)">';
+    document.body.appendChild(lightbox);
+
+    const lightboxImg = document.getElementById("lightbox-img");
+
+    points.forEach(pt => {
+      pt.addEventListener("click", () => {
+        lightboxImg.src = pt.getAttribute("data-img");
+        lightbox.style.display = "flex";
+      });
+    });
+
+    lightbox.addEventListener("click", () => {
+      lightbox.style.display = "none";
+      lightboxImg.src = "";
+    });
+  </script>
+
+</body>
+</html>
