@@ -224,13 +224,43 @@
     <!-- Gallery -->
     <section id="gallery" aria-labelledby="gallery-heading">
       <h2 id="gallery-heading">Gallery</h2>
-      <div class="gallery-grid">
-        <div class="gallery-item"><img src="gallery1.jpg" alt="gallery 1"></div>
-        <div class="gallery-item"><img src="gallery2.jpg" alt="gallery 2"></div>
-        <div class="gallery-item"><img src="gallery3.jpg" alt="gallery 3"></div>
-        <div class="gallery-item"><img src="gallery4.jpg" alt="gallery 4"></div>
+      <p>Click on a location to view images.</p>
+      <div id="map-container" style="max-width:900px; margin:auto; position:relative;">
+        <!-- 简化世界地图 SVG -->
+        <svg viewBox="0 0 1000 500" style="width:100%; height:auto; border:1px solid #ddd;">
+          <!-- 示例几个点 -->
+          <circle cx="400" cy="200" r="8" fill="#6d28d9" class="map-point" data-img="gallery1.jpg"/>
+          <circle cx="700" cy="250" r="8" fill="#FADF7A" class="map-point" data-img="gallery2.jpg"/>
+          <circle cx="300" cy="350" r="8" fill="#D8BFFD" class="map-point" data-img="gallery3.jpg"/>
+        </svg>
       </div>
     </section>
+    
+    <!-- Lightbox 弹窗 -->
+    <div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+    background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:2000;">
+      <img id="lightbox-img" src="" style="max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+    </div>
+    
+    <script>
+      const points = document.querySelectorAll(".map-point");
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+    
+      points.forEach(pt => {
+        pt.style.cursor = "pointer";
+        pt.addEventListener("click", () => {
+          lightboxImg.src = pt.getAttribute("data-img");
+          lightbox.style.display = "flex";
+        });
+      });
+    
+      lightbox.addEventListener("click", () => {
+        lightbox.style.display = "none";
+        lightboxImg.src = "";
+      });
+    </script>
+    
 
     <!-- Contact -->
     <section id="contact" aria-labelledby="contact-heading">
