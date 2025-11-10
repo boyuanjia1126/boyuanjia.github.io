@@ -221,17 +221,22 @@
       </ul>
     </section>
 
-    <!-- Gallery -->
     <section id="gallery" aria-labelledby="gallery-heading">
       <h2 id="gallery-heading">Gallery</h2>
       <p>Click on a location to view images.</p>
       <div id="map-container" style="max-width:900px; margin:auto; position:relative;">
-        <!-- 简化世界地图 SVG -->
-        <svg viewBox="0 0 1000 500" style="width:100%; height:auto; border:1px solid #ddd;">
-          <!-- 示例几个点 -->
-          <circle cx="400" cy="200" r="8" fill="#6d28d9" class="map-point" data-img="gallery1.jpg"/>
-          <circle cx="700" cy="250" r="8" fill="#FADF7A" class="map-point" data-img="gallery2.jpg"/>
-          <circle cx="300" cy="350" r="8" fill="#D8BFFD" class="map-point" data-img="gallery3.jpg"/>
+        <!-- 世界地图 SVG -->
+        <svg viewBox="0 0 2000 1001" style="width:100%; height:auto; border:1px solid #ddd;">
+          <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/2000px-World_map_-_low_resolution.svg.png"
+                 x="0" y="0" width="2000" height="1001"/>
+          
+          <!-- 城市标记 (cx,cy 是相对 SVG 坐标, 需要调整到地图位置) -->
+          <circle cx="1050" cy="380" r="12" fill="#6d28d9" class="map-point" data-img="img/beijing.jpg" title="Beijing"></circle>
+          <circle cx="1080" cy="400" r="12" fill="#6d28d9" class="map-point" data-img="img/shanghai.jpg" title="Shanghai"></circle>
+          <circle cx="950" cy="420" r="12" fill="#6d28d9" class="map-point" data-img="img/yinchuan.jpg" title="Yinchuan"></circle>
+          <circle cx="350" cy="450" r="12" fill="#FADF7A" class="map-point" data-img="img/losangeles.jpg" title="Los Angeles"></circle>
+          <circle cx="1400" cy="350" r="12" fill="#D8BFFD" class="map-point" data-img="img/seoul.jpg" title="Seoul"></circle>
+          <circle cx="1450" cy="400" r="12" fill="#D8BFFD" class="map-point" data-img="img/tokyo.jpg" title="Tokyo"></circle>
         </svg>
       </div>
     </section>
@@ -260,7 +265,7 @@
         lightboxImg.src = "";
       });
     </script>
-    
+
 
     <!-- Contact -->
     <section id="contact" aria-labelledby="contact-heading">
