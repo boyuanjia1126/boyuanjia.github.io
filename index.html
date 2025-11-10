@@ -130,69 +130,57 @@
     </ul>
   </section>
 
-  <section class="section" id="gallery">
+  <section id="gallery" class="section">
     <h2>Gallery</h2>
-    <div id="map-container" style="position: relative; max-width: 100%; height: auto;">
-      <!-- 世界地图 SVG -->
-      <svg id="world-map" viewBox="0 0 1000 500" style="width: 100%; height: auto;">
-        <!-- 简化美观的世界轮廓 -->
-        <rect width="1000" height="500" fill="#eef2f7"/>
-        <path d="M..." fill="#c0c0c0"/> <!-- 这里可以替换为完整世界地图SVG路径 -->
-        
-        <!-- 城市标记 -->
-        <text class="city-star" x="500" y="200" data-city="北京" data-image="beijing.jpg">✨</text>
-        <text class="city-star" x="520" y="220" data-city="上海" data-image="shanghai.jpg">✨</text>
-        <text class="city-star" x="480" y="180" data-city="银川" data-image="yinchuan.jpg">✨</text>
-        <text class="city-star" x="100" y="250" data-city="洛杉矶" data-image="losangeles.jpg">✨</text>
-        <text class="city-star" x="730" y="180" data-city="首尔" data-image="seoul.jpg">✨</text>
-        <text class="city-star" x="770" y="200" data-city="东京" data-image="tokyo.jpg">✨</text>
+    <p>Click on a location to view images.</p>
+    <div id="map-container" style="position:relative; width:100%; max-width:1000px; margin:auto;">
+      <svg viewBox="0 0 2000 1001" style="width:100%; height:auto;">
+        <!-- 简化美观世界地图矢量路径 -->
+        <path d="M987,456 L1023,460 L1045,480 L1080,470 L1100,500 L1150,520 L1170,500 L1200,530
+                 L1250,540 L1270,520 L1300,550 L1350,560 L1380,540 L1400,560 L1450,570 L1470,550
+                 L1500,580 L1550,590 L1600,600 L1620,580 L1650,610 L1680,620 L1700,600 L1750,630
+                 L1780,640 L1800,620 L1850,650 L1880,660 L1900,640 L1950,670 L1980,680 L2000,660
+                 L2000,1000 L0,1000 L0,660 L20,680 L50,700 L80,720 L120,740 L160,760 L200,780
+                 L250,800 L300,820 L350,840 L400,860 L450,880 L500,900 L550,920 L600,940 L650,960
+                 L700,980 L750,1000 L987,456 Z" 
+              fill="#cce5ff" stroke="#888" stroke-width="0.5"></path>
+  
+        <!-- 紫色圆点城市标记 -->
+        <circle class="map-point" cx="1210" cy="360" r="8" fill="#8b5cf6" data-img="img/beijing.jpg" title="Beijing"></circle>
+        <circle class="map-point" cx="1240" cy="400" r="8" fill="#8b5cf6" data-img="img/shanghai.jpg" title="Shanghai"></circle>
+        <circle class="map-point" cx="1140" cy="390" r="8" fill="#8b5cf6" data-img="img/yinchuan.jpg" title="Yinchuan"></circle>
+        <circle class="map-point" cx="300" cy="450"  r="8" fill="#8b5cf6" data-img="img/losangeles.jpg" title="Los Angeles"></circle>
+        <circle class="map-point" cx="1330" cy="350" r="8" fill="#8b5cf6" data-img="img/seoul.jpg" title="Seoul"></circle>
+        <circle class="map-point" cx="1380" cy="400" r="8" fill="#8b5cf6" data-img="img/tokyo.jpg" title="Tokyo"></circle>
       </svg>
-  
-      <!-- 弹窗 -->
-      <div id="popup" style="position: absolute; display: none; background: rgba(255,255,255,0.95); border: 1px solid #ccc; padding: 10px; border-radius: 8px; z-index: 10;">
-        <span id="popup-close" style="cursor:pointer; float:right;">✖</span>
-        <h3 id="popup-title"></h3>
-        <img id="popup-image" src="" alt="" style="max-width:300px; max-height:300px; display:block; margin-top:10px; border-radius:6px;">
-      </div>
     </div>
-  </section>
   
-  <style>
-    .city-star {
-      font-size: 24px;
-      fill: #a480ff; /* 紫色 */
-      cursor: pointer;
-    }
-  </style>
-
-  <script>
-    const stars = document.querySelectorAll('.city-star');
-    const popup = document.getElementById('popup');
-    const popupTitle = document.getElementById('popup-title');
-    const popupImage = document.getElementById('popup-image');
-    const popupClose = document.getElementById('popup-close');
-    const mapContainer = document.getElementById('map-container');
+    <!-- 弹窗 -->
+    <div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+         background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:2000;">
+      <img id="lightbox-img" src="" alt="" style="max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+    </div>
   
-    stars.forEach(star => {
-      star.addEventListener('click', e => {
-        const city = star.getAttribute('data-city');
-        const img = star.getAttribute('data-image');
-        popupTitle.innerText = city;
-        popupImage.src = img;
-        
-        // 弹窗位置在星星附近
-        const rect = star.getBoundingClientRect();
-        const containerRect = mapContainer.getBoundingClientRect();
-        popup.style.left = (rect.left - containerRect.left + 20) + 'px';
-        popup.style.top = (rect.top - containerRect.top - 10) + 'px';
-        popup.style.display = 'block';
+    <script>
+      const points = document.querySelectorAll(".map-point");
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+  
+      points.forEach(pt => {
+        pt.style.cursor = "pointer";
+        pt.addEventListener("click", () => {
+          lightboxImg.src = pt.getAttribute("data-img");
+          lightbox.style.display = "flex";
+        });
       });
-    });
   
-    popupClose.addEventListener('click', () => {
-      popup.style.display = 'none';
-    });
-  </script>
+      lightbox.addEventListener("click", () => {
+        lightbox.style.display = "none";
+        lightboxImg.src = "";
+      });
+    </script>
+  </section>
+
 
   <!-- Contact -->
   <section class="section" id="contact">
