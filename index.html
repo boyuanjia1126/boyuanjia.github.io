@@ -1,8 +1,205 @@
-<main>
-  <h1>News</h1>
-  <ul>
-    <li>Nov 2025 — Presented my research at ASIS&T 2025 in Washington DC 🎉</li>
-    <li>July 2025 — Joined UCLA as a visiting graduate student.</li>
-    <li>July 2025 — Graduated from Peking University.</li>
-  </ul>
-</main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boyuan Jia | Academic Homepage</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #fff;
+      color: #222;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 10px 30px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+      z-index: 1000;
+    }
+
+    header img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    nav a {
+      margin: 0 14px;
+      color: #6c4fa1;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #b599ff;
+    }
+
+    section {
+      max-width: 800px;
+      margin: 120px auto;
+      padding: 0 20px;
+    }
+
+    h1, h2 {
+      color: #4b2e83;
+      font-weight: 600;
+    }
+
+    h1 { font-size: 2.2em; margin-bottom: 0.4em; }
+    h2 { font-size: 1.6em; margin-bottom: 0.5em; }
+
+    a {
+      color: #7a5fd1;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: #777;
+      font-size: 0.9em;
+    }
+
+    /* ✨漂浮星星✨ */
+    .floating-star {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      animation-name: floatStar;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes floatStar {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    ul { line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <img src="boyuan.jpg" alt="Boyuan Jia">
+      <span style="font-weight: 600; color:#4b2e83;">Boyuan Jia</span>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- 🌸 About -->
+  <section id="about">
+    <h1>About</h1>
+    <p><strong>Visiting Graduate Student at UCLA</strong></p>
+    <p>Research interests: Human-centered AI, computational social science, and digital literacy.</p>
+    <p>
+      <a href="#">CV</a> |
+      <a href="#">GitHub</a> |
+      <a href="#">Instagram</a>
+    </p>
+  </section>
+
+  <!-- 📰 News -->
+  <section id="news">
+    <h2>News</h2>
+    <ul>
+      <li>Nov 2025 — Presented my research at ASIS&T 2025 in Washington DC 🎉</li>
+      <li>July 2025 — Joined UCLA as a visiting graduate student.</li>
+      <li>July 2025 — Graduated from Peking University.</li>
+    </ul>
+  </section>
+
+  <!-- 📚 Publications -->
+  <section id="publications">
+    <h2>Publications</h2>
+    <ul>
+      <li>Jia, B., & Hosseinmardi, H. (2025). <em>Understanding Prompt Literacy: Cognitive and Sociocultural Perspectives.</em> In Proceedings of IC2S2 2025.</li>
+      <li>Jia, B. (2024). <em>AIGC Literacy and User Interaction Patterns.</em> Journal of Digital Humanities Research.</li>
+    </ul>
+  </section>
+
+  <!-- 🌷 Gallery -->
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+      <img src="gallery1.jpg" alt="Gallery 1">
+      <img src="gallery2.jpg" alt="Gallery 2">
+      <img src="gallery3.jpg" alt="Gallery 3">
+    </div>
+  </section>
+
+  <!-- 💌 Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:boyuanjjjj@gmail.com">boyuanjjjj [at] gmail.com</a></p>
+    <p>UCLA, Los Angeles, CA, USA</p>
+  </section>
+
+  <footer>© 2025 Boyuan Jia. Last updated November 2025.</footer>
+
+  <!-- ✨星星脚本✨ -->
+  <script>
+    const symbols = ["✨", "🌟", "⭐", "💫"];
+    function createStar() {
+      const star = document.createElement("div");
+      star.className = "floating-star";
+      star.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.top = "-10vh";
+      star.style.fontSize = (12 + Math.random() * 18) + "px";
+      star.style.color = Math.random() < 0.5 ? "#c8a2ff" : "#ffea85";
+      star.style.animationDuration = (6 + Math.random() * 6) + "s";
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), parseFloat(star.style.animationDuration) * 1000);
+    }
+    setInterval(() => { if (Math.random() < 0.2) createStar(); }, 400);
+  </script>
+
+</body>
+</html>
