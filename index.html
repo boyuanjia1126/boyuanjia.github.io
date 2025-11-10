@@ -1,316 +1,219 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Boyuan Jia — Academic Homepage</title>
   <style>
-    :root{
-      --nav-height: 68px; /* 顶部导航高度（用于锚点偏移） */
-      --accent: #6d28d9;
-      --muted: #666;
-    }
-
-    /* 基础 */
-    * { box-sizing: border-box; }
     body {
-      margin: 0;
-      padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      color: #222;
-      background: #fff;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-
-    /* 固定导航栏 */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--nav-height);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
-      z-index: 1000;
-    }
-    nav ul {
-      display: flex;
-      gap: 22px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    nav a {
-      color: #333;
-      text-decoration: none;
-      font-weight: 600;
-      padding: 6px 8px;
-      border-radius: 6px;
-      transition: color .18s, background .18s;
-    }
-    nav a:hover { color: var(--accent); background: rgba(109,40,217,0.04); }
-
-    /* 主体容器：把上边距稍微往上收一点，让 About 更靠近导航 */
-    main {
+      margin: 40px auto;
       max-width: 900px;
-      margin: calc(var(--nav-height) + 18px) auto 80px; /* 改成比之前小的顶部空白 */
-      padding: 0 20px;
-      line-height: 1.7;
+      line-height: 1.6;
+      color: #222;
+      background-color: #fff;
+      position: relative;
+      overflow-x: hidden;
     }
-
-    /* 每个 section 的锚点偏移（防止被固定导航挡住） */
-    section {
-      margin-bottom: 72px;
-      /* 关键：当锚点跳转到该 section 时，浏览器会把它向上偏移一定距离 */
-      scroll-margin-top: calc(var(--nav-height) + 16px);
-    }
-
-    header.hero {
-      text-align: center;
-      margin-bottom: 40px; /* 缩小间距 */
-    }
-
-    /* 头像：变大但保持美观 */
+    header { display: flex; align-items: center; gap: 20px; margin-bottom: 20px;}
+    h1, h2 { font-weight: 600; margin-bottom: 0.3em; }
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.5em; }
+    a { color: #0066cc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .section { margin-top: 2.5em; }
+    .email { color: #444; }
+    hr { border: none; border-top: 1px solid #eee; margin: 2em 0; }
+    
+    /* 圆形头像 */
     .profile-pic {
-      width: 170px;
-      height: 170px;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.16);
-      transition: transform .25s;
-      display: inline-block;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
     }
-    .profile-pic:hover { transform: scale(1.03); }
+    .profile-pic:hover { transform: scale(1.05); }
 
-    /* 头像下方文字变小并更精致 */
-    .hero-title {
-      font-size: 1.9rem;
-      margin: 12px 0 4px;
-      color: #40246e;
-      font-weight: 700;
-      line-height: 1.1;
-    }
-    .hero-sub {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem; /* 比正文小一点 */
-    }
-    .hero-links {
-      margin-top: 10px;
-      font-size: 0.95rem;
-    }
-    .hero-links a { color: var(--accent); text-decoration: none; margin-right: 10px; }
-    .hero-links a:hover { text-decoration: underline; }
-
-    h2 {
-      color: #482f82;
-      margin: 6px 0 12px;
-      font-size: 1.4rem;
-    }
-
-    /* Gallery 栅格 */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 14px;
-    }
-    .gallery-item {
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      background: #f8f8fb;
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-      transition: transform .45s ease;
-    }
-    .gallery-item:hover img { transform: scale(1.06); }
-
-    ul { padding-left: 1.1em; }
-    li { margin: 0.5em 0; }
-
-    footer {
-      text-align: center;
-      color: #777;
-      padding: 36px 10px 80px;
-      font-size: 0.92rem;
-    }
-
-    /* 星星（稀疏梦幻） */
+    /* 漂浮星星 */
     .floating-star {
       position: fixed;
       pointer-events: none;
       z-index: 9999;
+      font-size: 16px;
       opacity: 0;
-      font-size: 14px;
-      animation: starMove linear forwards;
+      animation-name: floatStar;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
     }
-    @keyframes starMove {
-      0% { transform: translateY(60vh) scale(.9) rotate(0deg); opacity: 0; }
-      12% { opacity: 1; }
-      88% { opacity: 1; }
-      100% { transform: translateY(-20vh) scale(1.05) rotate(300deg); opacity: 0; }
+    @keyframes floatStar {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0.5; }
     }
 
-    /* 响应式微调 */
-    @media (max-width: 720px) {
-      .profile-pic { width: 140px; height: 140px; }
-      .hero-title { font-size: 1.6rem; }
-      .hero-sub, .hero-links { font-size: 0.92rem; }
-      .gallery-item img { height: 160px; }
+    /* 导航 */
+    nav { margin-bottom: 20px; }
+    nav a { margin-right: 15px; font-weight: 500; }
+
+    /* Gallery */
+    #gallery svg { width: 100%; height: auto; border:1px solid #ddd; }
+    .map-point { cursor:pointer; }
+
+    /* Lightbox */
+    #lightbox { display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:2000; }
+    #lightbox-img { max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.4); }
+
+    /* 移动端自适应 */
+    @media (max-width: 600px) {
+      header { flex-direction: column; text-align: center; gap: 15px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- 顶部固定导航 -->
-  <nav aria-label="Main navigation">
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#news">News</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+  <!-- Header -->
+  <header>
+    <img src="boyuan.jpg" alt="Boyuan Jia" class="profile-pic">
+    <div>
+      <h1>Boyuan Jia</h1>
+      <p><strong>Visiting Graduate Student at UCLA</strong></p>
+      <p style="font-size:0.9em;">Research interests: Human-centered AI, computational social science.</p>
+      <p class="email" style="font-size:0.9em;">Email: boyuan [at] gmail.com</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#news">News</a>
+    <a href="#publications">Publications</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
   </nav>
 
-  <main>
-    <!-- Hero / About（about 往上靠近 nav）-->
-    <header class="hero" id="about">
-      <img class="profile-pic" src="boyuan.jpg" alt="Boyuan Jia">
-      <h1 class="hero-title">Boyuan Jia</h1>
-      <p class="hero-sub"><strong>Visiting Graduate Student at UCLA</strong></p>
-      <p class="hero-sub">Research interests: Human-centered AI · Computational social science </p>
+  <hr>
 
-      <p class="hero-links">
-        <a href="cv.pdf" target="_blank" rel="noopener">📄 CV</a>
-        <a href="https://github.com/" target="_blank" rel="noopener">💻 GitHub</a>
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener">📸 Instagram</a>
-      </p>
-    </header>
-    <section id="about" aria-labelledby="about-heading">
-      <h2 id="about-heading">About</h2>
-      <ul>
-        <li>Currently I'm a visiting graduate student in UCLA, honorly supervised by </li>
-      </ul>
-    </section>
-    <!-- News -->
-    <section id="news" aria-labelledby="news-heading">
-      <h2 id="news-heading">News</h2>
-      <ul>
-        <li><strong>Nov 2025:</strong> Presented at ASIS&T 2025 in Washington DC 🎉</li>
-        <li><strong>July 2025:</strong> Joined UCLA as a visiting graduate student</li>
-        <li><strong>July 2025:</strong> Graduated from Peking University</li>
-      </ul>
-    </section>
+  <!-- About -->
+  <section class="section" id="about">
+    <h2>About</h2>
+    <p>
+      Currently I am a visiting student at UCLA, and I just graduated from Peking University this summer.
+      I'm honored to be supervised by Xiang 'Anthony' Chen (UCLA), Pu Yan (Peking University) and Xiaoguang Wang (Wuhan University).
+      My research focuses on <strong>human-centered AI</strong> and how <strong>technology impacts society</strong>.
+    </p>
+    <p>
+      <a href="cv.pdf" target="_blank">📄 CV</a> | 
+      <a href="https://github.com/yourgithub" target="_blank">💻 GitHub</a>
+    </p>
+  </section>
 
-    <!-- Publications -->
-    <section id="publications" aria-labelledby="pubs-heading">
-      <h2 id="pubs-heading">Publications</h2>
-      <ul>
-        <li>Jia, B., & Hosseinmardi, H. (2025). <em>Understanding Prompt Literacy: Cognitive and Sociocultural Perspectives.</em> IC2S2 2025.</li>
-        <li>Jia, B. (2024). <em>AIGC Literacy and User Interaction Patterns.</em> Journal of Digital Humanities Research.</li>
-      </ul>
-    </section>
+  <!-- News -->
+  <section class="section" id="news">
+    <h2>News</h2>
+    <ul>
+      <li>Nov 2025: Presented my research ASIS&T 2025 in Washington DC 🎉.</li>
+      <li>July 2025: Joined UCLA as a visiting graduate student in Human-Centered AI.</li>
+      <li>July 2025: Graduated from Peking University.</li>
+    </ul>
+  </section>
 
-    <section id="gallery" aria-labelledby="gallery-heading">
-      <h2 id="gallery-heading">Gallery</h2>
-      <p>Click on a location to view images.</p>
-      <div id="map-container" style="max-width:900px; margin:auto; position:relative;">
-        <!-- 世界地图 SVG -->
-        <svg viewBox="0 0 2000 1001" style="width:100%; height:auto; border:1px solid #ddd;">
-          <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/2000px-World_map_-_low_resolution.svg.png"
-                 x="0" y="0" width="2000" height="1001"/>
-          
-          <!-- 城市标记 (cx,cy 是相对 SVG 坐标, 需要调整到地图位置) -->
-          <circle cx="1050" cy="380" r="12" fill="#6d28d9" class="map-point" data-img="img/beijing.jpg" title="Beijing"></circle>
-          <circle cx="1080" cy="400" r="12" fill="#6d28d9" class="map-point" data-img="img/shanghai.jpg" title="Shanghai"></circle>
-          <circle cx="950" cy="420" r="12" fill="#6d28d9" class="map-point" data-img="img/yinchuan.jpg" title="Yinchuan"></circle>
-          <circle cx="350" cy="450" r="12" fill="#FADF7A" class="map-point" data-img="img/losangeles.jpg" title="Los Angeles"></circle>
-          <circle cx="1400" cy="350" r="12" fill="#D8BFFD" class="map-point" data-img="img/seoul.jpg" title="Seoul"></circle>
-          <circle cx="1450" cy="400" r="12" fill="#D8BFFD" class="map-point" data-img="img/tokyo.jpg" title="Tokyo"></circle>
-        </svg>
-      </div>
-    </section>
-    
-    <!-- Lightbox 弹窗 -->
-    <div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
-    background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:2000;">
-      <img id="lightbox-img" src="" style="max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+  <!-- Publications -->
+  <section class="section" id="publications">
+    <h2>Publications</h2>
+    <ul>
+      <li>Jia, B., & Hosseinmardi, H. (2025). <em>Understanding Prompt Literacy: Cognitive and Sociocultural Perspectives.</em> IC2S2 2025.</li>
+      <li>Jia, B. (2024). <em>AIGC Literacy and User Interaction Patterns.</em> Journal of Digital Humanities Research.</li>
+    </ul>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section" id="gallery">
+    <h2>Gallery</h2>
+    <p>Click on a location to view images.</p>
+    <div id="map-container" style="position:relative;">
+      <svg viewBox="0 0 2000 1001">
+        <image href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/2000px-World_map_-_low_resolution.svg.png"
+               x="0" y="0" width="2000" height="1001"/>
+        <!-- 城市标记 -->
+        <circle cx="1210" cy="360" r="12" fill="#6d28d9" class="map-point" data-img="img/beijing.jpg" title="Beijing"></circle>
+        <circle cx="1240" cy="400" r="12" fill="#6d28d9" class="map-point" data-img="img/shanghai.jpg" title="Shanghai"></circle>
+        <circle cx="1140" cy="390" r="12" fill="#6d28d9" class="map-point" data-img="img/yinchuan.jpg" title="Yinchuan"></circle>
+        <circle cx="300" cy="450" r="12" fill="#FADF7A" class="map-point" data-img="img/losangeles.jpg" title="Los Angeles"></circle>
+        <circle cx="1330" cy="350" r="12" fill="#D8BFFD" class="map-point" data-img="img/seoul.jpg" title="Seoul"></circle>
+        <circle cx="1380" cy="400" r="12" fill="#D8BFFD" class="map-point" data-img="img/tokyo.jpg" title="Tokyo"></circle>
+      </svg>
     </div>
-    
-    <script>
-      const points = document.querySelectorAll(".map-point");
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImg = document.getElementById("lightbox-img");
-    
-      points.forEach(pt => {
-        pt.style.cursor = "pointer";
-        pt.addEventListener("click", () => {
-          lightboxImg.src = pt.getAttribute("data-img");
-          lightbox.style.display = "flex";
-        });
-      });
-    
-      lightbox.addEventListener("click", () => {
-        lightbox.style.display = "none";
-        lightboxImg.src = "";
-      });
-    </script>
+  </section>
 
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:boyuanjjjj@gmail.com">boyuanjjjj [at] gmail.com</a></p>
+    <p>UCLA, Los Angeles, CA, USA</p>
+  </section>
 
-    <!-- Contact -->
-    <section id="contact" aria-labelledby="contact-heading">
-      <h2 id="contact-heading">Contact</h2>
-      <p>Email: <a href="mailto:boyuanjjjj@gmail.com">boyuanjjjj@gmail.com</a></p>
-      <p>UCLA, Los Angeles, CA, USA</p>
-    </section>
-  </main>
-
+  <hr>
   <footer>
-    © 2025 Boyuan Jia — Last updated November 2025.
+    <p style="font-size: 0.9em; color: #777;">
+      © 2025 Boyuan Jia. Last updated November 2025.
+    </p>
   </footer>
 
-  <!-- 星星脚本（稀疏优雅）-->
+  <!-- Floating stars -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const symbols = ["✨","🌟"];
-      const count = 18; // 更稀疏：18颗
-      for (let i=0;i<count;i++){
-        const el = document.createElement("div");
-        el.className = "floating-star";
-        el.textContent = symbols[Math.floor(Math.random()*symbols.length)];
-        // 全屏随机位置（y 也随机，这样不会都从底部穿过）
-        el.style.left = Math.random()*100 + "vw";
-        el.style.top = Math.random()*100 + "vh";
-        el.style.fontSize = (12 + Math.random()*18) + "px";
-        el.style.color = Math.random()<0.5 ? "#D8BFFD" : "#FADF7A"; // 淡紫或淡金
-        // 动画持续时间和延迟，制造缓慢漂浮感（往上或往下）
-        const dur = 22 + Math.random()*18;
-        const delay = Math.random()*8;
-        el.style.animationDuration = dur + "s";
-        el.style.animationDelay = delay + "s";
-        document.body.appendChild(el);
-        // 可选：重复性地给一些星星小幅移动（保持页面整洁，这里不重复生成）
-      }
+    function createStar() {
+      const star = document.createElement("div");
+      star.className = "floating-star";
+      star.innerText = "✨";
 
-      // 修复一个小问题：如果用户直接通过地址栏带锚点打开页面，确保滚动到合适位置
-      if (location.hash) {
-        const id = location.hash.slice(1);
-        const el = document.getElementById(id);
-        if (el) {
-          setTimeout(()=> el.scrollIntoView({behavior:"smooth", block:"start"}), 200);
-        }
-      }
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.fontSize = (12 + Math.random() * 20) + "px";
+      star.style.animationDuration = (8 + Math.random() * 5) + "s";
+
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), parseFloat(star.style.animationDuration) * 1000);
+    }
+
+    setInterval(createStar, 600); // 稀疏一些
+  </script>
+
+  <!-- Gallery Lightbox -->
+  <script>
+    const points = document.querySelectorAll(".map-point");
+    const lightbox = document.createElement("div");
+    lightbox.id = "lightbox";
+    lightbox.style.display = "none";
+    lightbox.style.position = "fixed";
+    lightbox.style.top = "0";
+    lightbox.style.left = "0";
+    lightbox.style.width = "100%";
+    lightbox.style.height = "100%";
+    lightbox.style.background = "rgba(0,0,0,0.8)";
+    lightbox.style.justifyContent = "center";
+    lightbox.style.alignItems = "center";
+    lightbox.style.zIndex = "2000";
+    lightbox.style.display = "flex";
+    lightbox.innerHTML = '<img id="lightbox-img" style="max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.4)">';
+    document.body.appendChild(lightbox);
+
+    const lightboxImg = document.getElementById("lightbox-img");
+
+    points.forEach(pt => {
+      pt.addEventListener("click", () => {
+        lightboxImg.src = pt.getAttribute("data-img");
+        lightbox.style.display = "flex";
+      });
+    });
+
+    lightbox.addEventListener("click", () => {
+      lightbox.style.display = "none";
+      lightboxImg.src = "";
     });
   </script>
+
 </body>
 </html>
