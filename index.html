@@ -1,204 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Boyuan Jia | Academic Homepage</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boyuan Jia — Academic Homepage</title>
   <style>
     body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       margin: 0;
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-color: #fff;
+      padding: 0;
       color: #222;
+      background-color: #fff;
       overflow-x: hidden;
-      scroll-behavior: smooth;
     }
 
-    /* Header */
-    header {
+    /* 导航栏 */
+    nav {
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(8px);
-      padding: 10px 30px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       z-index: 1000;
     }
-
-    header img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      object-fit: cover;
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      list-style: none;
+      margin: 0;
+      padding: 12px 0;
     }
-
     nav a {
-      margin: 0 14px;
-      color: #6c4fa1;
-      font-weight: 500;
       text-decoration: none;
-      transition: color 0.3s ease;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.2s;
     }
-
     nav a:hover {
-      color: #b599ff;
+      color: #8b5cf6; /* 柔和紫色 */
     }
 
-    section {
-      max-width: 800px;
-      margin: 120px auto;
+    /* 内容布局 */
+    main {
+      max-width: 850px;
+      margin: 100px auto 60px auto;
       padding: 0 20px;
+      line-height: 1.7;
     }
+    section { margin-bottom: 80px; }
 
     h1, h2 {
-      color: #4b2e83;
       font-weight: 600;
     }
+    h1 { font-size: 2.3em; margin-bottom: 0.2em; }
+    h2 { font-size: 1.6em; margin-bottom: 0.6em; }
 
-    h1 { font-size: 2.2em; margin-bottom: 0.4em; }
-    h2 { font-size: 1.6em; margin-bottom: 0.5em; }
+    a { color: #6d28d9; }
+    a:hover { text-decoration: underline; }
 
-    a {
-      color: #7a5fd1;
-      text-decoration: none;
+    /* 头像 */
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      margin-bottom: 15px;
+      transition: transform 0.3s ease;
+    }
+    .profile-pic:hover {
+      transform: scale(1.05);
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
+    header {
       text-align: center;
-      padding: 40px;
-      color: #777;
-      font-size: 0.9em;
-    }
-
-    /* ✨漂浮星星✨ */
-    .floating-star {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0;
-      animation-name: floatStar;
-      animation-timing-function: linear;
-      animation-fill-mode: forwards;
-    }
-
-    @keyframes floatStar {
-      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+      margin-bottom: 60px;
     }
 
     /* Gallery */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 15px;
     }
-
-    .gallery-grid img {
-      width: 100%;
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
     }
-
-    .gallery-grid img:hover {
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img {
       transform: scale(1.05);
     }
 
-    ul { line-height: 1.7; }
+    /* 星星动画 */
+    .floating-star {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 16px;
+      opacity: 0;
+      animation: floatStar linear forwards;
+    }
+
+    @keyframes floatStar {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    footer {
+      text-align: center;
+      color: #888;
+      font-size: 0.9em;
+      padding: 20px 0 40px 0;
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <img src="boyuan.jpg" alt="Boyuan Jia">
-      <span style="font-weight: 600; color:#4b2e83;">Boyuan Jia</span>
-    </div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#news">News</a>
-      <a href="#publications">Publications</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <!-- 🌸 About -->
-  <section id="about">
-    <h1>About</h1>
-    <p><strong>Visiting Graduate Student at UCLA</strong></p>
-    <p>Research interests: Human-centered AI, computational social science, and digital literacy.</p>
-    <p>
-      <a href="#">CV</a> |
-      <a href="#">GitHub</a> |
-      <a href="#">Instagram</a>
-    </p>
-  </section>
-
-  <!-- 📰 News -->
-  <section id="news">
-    <h2>News</h2>
+  <!-- 导航栏 -->
+  <nav>
     <ul>
-      <li>Nov 2025 — Presented my research at ASIS&T 2025 in Washington DC 🎉</li>
-      <li>July 2025 — Joined UCLA as a visiting graduate student.</li>
-      <li>July 2025 — Graduated from Peking University.</li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-  </section>
+  </nav>
 
-  <!-- 📚 Publications -->
-  <section id="publications">
-    <h2>Publications</h2>
-    <ul>
-      <li>Jia, B., & Hosseinmardi, H. (2025). <em>Understanding Prompt Literacy: Cognitive and Sociocultural Perspectives.</em> In Proceedings of IC2S2 2025.</li>
-      <li>Jia, B. (2024). <em>AIGC Literacy and User Interaction Patterns.</em> Journal of Digital Humanities Research.</li>
-    </ul>
-  </section>
+  <!-- 主体内容 -->
+  <main>
+    <header>
+      <img src="boyuan.jpg" alt="Boyuan Jia" class="profile-pic">
+      <h1>Boyuan Jia</h1>
+      <p><strong>Visiting Graduate Student at UCLA</strong></p>
+      <p>Researching human-centered AI and computational social science.</p>
+    </header>
 
-  <!-- 🌷 Gallery -->
-  <section id="gallery">
-    <h2>Gallery</h2>
-    <div class="gallery-grid">
-      <img src="gallery1.jpg" alt="Gallery 1">
-      <img src="gallery2.jpg" alt="Gallery 2">
-      <img src="gallery3.jpg" alt="Gallery 3">
-    </div>
-  </section>
+    <!-- About -->
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        I am a visiting graduate student at UCLA and a recent graduate from Peking University.
+        My research focuses on <strong>human-centered AI</strong> and how technology shapes society.
+      </p>
+      <p>
+        <a href="cv.pdf" target="_blank">📄 View CV</a> |
+        <a href="https://github.com/boyuanjia" target="_blank">💻 GitHub</a>
+      </p>
+    </section>
 
-  <!-- 💌 Contact -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:boyuanjjjj@gmail.com">boyuanjjjj [at] gmail.com</a></p>
-    <p>UCLA, Los Angeles, CA, USA</p>
-  </section>
+    <!-- News -->
+    <section id="news">
+      <h2>News</h2>
+      <ul>
+        <li>Nov 2025: Presented at ASIS&T 2025 in Washington DC 🎉</li>
+        <li>July 2025: Joined UCLA as a visiting graduate student</li>
+        <li>July 2025: Graduated from Peking University</li>
+      </ul>
+    </section>
 
-  <footer>© 2025 Boyuan Jia. Last updated November 2025.</footer>
+    <!-- Publications -->
+    <section id="publications">
+      <h2>Publications</h2>
+      <p>[Coming soon]</p>
+    </section>
 
-  <!-- ✨星星脚本✨ -->
+    <!-- Gallery -->
+    <section id="gallery">
+      <h2>Gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="gallery1.jpg" alt="Gallery image 1"></div>
+        <div class="gallery-item"><img src="gallery2.jpg" alt="Gallery image 2"></div>
+        <div class="gallery-item"><img src="gallery3.jpg" alt="Gallery image 3"></div>
+        <div class="gallery-item"><img src="gallery4.jpg" alt="Gallery image 4"></div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:boyuanjjjj@gmail.com">boyuanjjjj@gmail.com</a></p>
+      <p>Instagram: <a href="https://instagram.com/boyuanjia" target="_blank">@boyuanjia</a></p>
+      <p>UCLA, Los Angeles, CA</p>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Boyuan Jia — Last updated November 2025.
+  </footer>
+
   <script>
-    const symbols = ["✨", "🌟", "⭐", "💫"];
+    const symbols = ["✨", "🌸", "💫", "🌟", "🪞"];
     function createStar() {
       const star = document.createElement("div");
       star.className = "floating-star";
       star.innerText = symbols[Math.floor(Math.random() * symbols.length)];
       star.style.left = Math.random() * 100 + "vw";
-      star.style.top = "-10vh";
-      star.style.fontSize = (12 + Math.random() * 18) + "px";
-      star.style.color = Math.random() < 0.5 ? "#c8a2ff" : "#ffea85";
-      star.style.animationDuration = (6 + Math.random() * 6) + "s";
+      star.style.fontSize = (10 + Math.random() * 20) + "px";
+      star.style.animationDuration = (5 + Math.random() * 8) + "s";
       document.body.appendChild(star);
-      setTimeout(() => star.remove(), parseFloat(star.style.animationDuration) * 1000);
+      setTimeout(() => star.remove(), 10000);
     }
-    setInterval(() => { if (Math.random() < 0.2) createStar(); }, 400);
+    setInterval(createStar, 1200);
   </script>
 
 </body>
