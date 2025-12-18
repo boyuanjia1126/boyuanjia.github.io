@@ -142,6 +142,77 @@
     text-align: center;
     font-size: 1.6em;
     margin-bottom: 20px;
+  }
+
+  #news ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  #news li {
+    margin-bottom: 12px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  /* 悬浮图片容器 */
+  #hover-image-container {
+    position: absolute;
+    display: none;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  #hover-image-container img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+</style>
+
+<script>
+  const items = document.querySelectorAll('.news-item');
+  const hoverContainer = document.getElementById('hover-image-container');
+  const hoverImage = document.getElementById('hover-image');
+
+  items.forEach(item => {
+    item.addEventListener('mousemove', e => {
+      const imgUrl = item.dataset.img; // 本地图片
+      hoverImage.src = imgUrl;
+      hoverContainer.style.display = 'block';
+      // 图片跟随光标
+      hoverContainer.style.left = e.pageX + 15 + 'px';
+      hoverContainer.style.top = e.pageY + 15 + 'px';
+    });
+
+    item.addEventListener('mouseleave', () => {
+      hoverContainer.style.display = 'none';
+    });
+  });
+</script>
+
+
+  <!-- Hover Image Container -->
+  <div id="hover-image-container">
+    <img id="hover-image" src="" alt="News Image">
+  </div>
+</section>
+
+<style>
+  /* 基本样式 */
+  #news {
+    margin: 40px 0;
+    font-size: 14px;
+    position: relative;
+  }
+
+  #news h2 {
+    text-align: center;
+    font-size: 1.6em;
+    margin-bottom: 20px;
     color: #222;
   }
 
