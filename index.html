@@ -429,8 +429,12 @@ document.addEventListener('DOMContentLoaded', () => {
     <img id="lightbox-img" src="" alt="" style="max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
   </div>
 
+  <!-- 引入 Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
   <script>
-    const map = L.map('map').setView([35, 100], 2); // 中心和缩放
+    const map = L.map('map').setView([35, 100], 2);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
@@ -449,19 +453,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxImg = document.getElementById("lightbox-img");
 
     cities.forEach(city => {
-      const marker = L.circleMarker(city.coords, {radius:8, color:'#8b5cf6', fillColor:'#8b5cf6', fillOpacity:1}).addTo(map);
+      const marker = L.marker(city.coords).addTo(map);
+
+      // 鼠标悬浮显示城市名字
+      marker.bindTooltip(city.name, {permanent:false, direction:'top'});
+
+      // 点击标记显示图片弹窗
       marker.on('click', () => {
         lightboxImg.src = city.img;
         lightbox.style.display = "flex";
       });
     });
 
+    // 点击弹窗任意位置关闭
     lightbox.addEventListener("click", () => {
       lightbox.style.display = "none";
       lightboxImg.src = "";
     });
   </script>
 </section>
+
 
   <!-- Contact -->
   <section class="section" id="contact">
