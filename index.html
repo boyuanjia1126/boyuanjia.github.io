@@ -110,15 +110,90 @@
     </p>
   </section>
 
-  <!-- News -->
-  <section class="section" id="news">
-    <h2>News</h2>
-    <ul>
-      <li>Nov 2025: Presented my research ASIS&T 2025 in Washington DC 🎉.</li>
-      <li>July 2025: Joined UCLA as a visiting graduate student in Human-Centered AI.</li>
-      <li>July 2025: Graduated from Peking University.</li>
-    </ul>
-  </section>
+<section class="section" id="news">
+  <h2>News</h2>
+  <ul class="news-list">
+    <li class="news-item" data-img="dc.jpg">
+      Nov 2025: Presented my research ASIS&T 2025 in Washington DC 🎉.
+    </li>
+    <li class="news-item" data-img="uclahci.jpg">
+      July 2025: Joined UCLA as a visiting graduate student in Human-Centered AI.
+    </li>
+    <li class="news-item" data-img="master.jpg">
+      July 2025: Graduated from Peking University.
+    </li>
+  </ul>
+
+  <!-- Hover Image Container -->
+  <div id="hover-image-container">
+    <img id="hover-image" src="" alt="News Image">
+  </div>
+</section>
+
+<style>
+  /* 基本样式 */
+  #news {
+    margin: 40px 0;
+    font-size: 14px;
+    position: relative;
+  }
+
+  #news h2 {
+    text-align: center;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    color: #222;
+  }
+
+  #news ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  #news li {
+    margin-bottom: 12px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  /* 悬浮图片容器 */
+  #hover-image-container {
+    position: absolute;
+    display: none;
+    pointer-events: none; /* 鼠标不会影响 hover 图片 */
+    z-index: 100;
+  }
+
+  #hover-image-container img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+</style>
+
+<script>
+  const items = document.querySelectorAll('.news-item');
+  const hoverContainer = document.getElementById('hover-image-container');
+  const hoverImage = document.getElementById('hover-image');
+
+  items.forEach(item => {
+    item.addEventListener('mousemove', e => {
+      const imgUrl = item.dataset.img;
+      hoverImage.src = imgUrl;
+      hoverContainer.style.display = 'block';
+      hoverContainer.style.left = e.pageX + 15 + 'px';
+      hoverContainer.style.top = e.pageY + 15 + 'px';
+    });
+
+    item.addEventListener('mouseleave', () => {
+      hoverContainer.style.display = 'none';
+    });
+  });
+</script>
+
 
 
 <!-- Publications -->
