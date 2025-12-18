@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>News Hover Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 <style>
   body { font-family: Arial; padding: 40px; font-size: 14px; position: relative; }
   h2 { text-align: center; font-size: 1.6em; margin-bottom: 20px; }
@@ -427,17 +430,19 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 
   <script>
-    const map = L.map('map').setView([20, 0], 2); // 中心和缩放
+    const map = L.map('map').setView([35, 100], 2); // 中心和缩放
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
     const cities = [
+      {name:"Yinchuan", coords:[38.4872,106.2309], img:"img/yinchuan.jpg"},
+      {name:"Wuhan", coords:[30.5928,114.3055], img:"img/wuhan.jpg"},
       {name:"Beijing", coords:[39.9042,116.4074], img:"img/beijing.jpg"},
-      {name:"Shanghai", coords:[31.2304,121.4737], img:"img/shanghai.jpg"},
       {name:"Los Angeles", coords:[34.0522,-118.2437], img:"img/losangeles.jpg"},
-      {name:"Tokyo", coords:[35.6762,139.6503], img:"img/tokyo.jpg"}
+      {name:"Tokyo", coords:[35.6762,139.6503], img:"img/tokyo.jpg"},
+      {name:"Seoul", coords:[37.5665,126.9780], img:"img/seoul.jpg"}
     ];
 
     const lightbox = document.getElementById("lightbox");
@@ -457,7 +462,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   </script>
 </section>
-
 
   <!-- Contact -->
   <section class="section" id="contact">
