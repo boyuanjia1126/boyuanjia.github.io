@@ -411,43 +411,41 @@ document.addEventListener('DOMContentLoaded', () => {
     color: #555;
   }
 </style>
+<section id="gallery" class="section">
+  <h2>Gallery</h2>
+  <p>Click on a city to view images.</p>
 
-  <section id="gallery" class="section">
-    <h2>Gallery</h2>
-    <p>Click on a location to view images.</p>
-    <div id="map-container" style="position:relative; width:100%; max-width:1000px; margin:auto;">
-      <svg viewBox="0 0 2000 1001" style="width:100%; height:auto;">
-        <!-- 简化美观世界地图矢量路径 -->
-        <path d="M987,456 L1023,460 L1045,480 L1080,470 L1100,500 L1150,520 L1170,500 L1200,530
-                 L1250,540 L1270,520 L1300,550 L1350,560 L1380,540 L1400,560 L1450,570 L1470,550
-                 L1500,580 L1550,590 L1600,600 L1620,580 L1650,610 L1680,620 L1700,600 L1750,630
-                 L1780,640 L1800,620 L1850,650 L1880,660 L1900,640 L1950,670 L1980,680 L2000,660
-                 L2000,1000 L0,1000 L0,660 L20,680 L50,700 L80,720 L120,740 L160,760 L200,780
-                 L250,800 L300,820 L350,840 L400,860 L450,880 L500,900 L550,920 L600,940 L650,960
-                 L700,980 L750,1000 L987,456 Z" 
-              fill="#cce5ff" stroke="#888" stroke-width="0.5"></path>
-  
-        <!-- 紫色圆点城市标记 -->
-        <circle class="map-point" cx="1210" cy="360" r="8" fill="#8b5cf6" data-img="img/beijing.jpg" title="Beijing"></circle>
-        <circle class="map-point" cx="1240" cy="400" r="8" fill="#8b5cf6" data-img="img/shanghai.jpg" title="Shanghai"></circle>
-        <circle class="map-point" cx="1140" cy="390" r="8" fill="#8b5cf6" data-img="img/yinchuan.jpg" title="Yinchuan"></circle>
-        <circle class="map-point" cx="300" cy="450"  r="8" fill="#8b5cf6" data-img="img/losangeles.jpg" title="Los Angeles"></circle>
-        <circle class="map-point" cx="1330" cy="350" r="8" fill="#8b5cf6" data-img="img/seoul.jpg" title="Seoul"></circle>
-        <circle class="map-point" cx="1380" cy="400" r="8" fill="#8b5cf6" data-img="img/tokyo.jpg" title="Tokyo"></circle>
-      </svg>
-    </div>
-  
-    <!-- 弹窗 -->
-    <div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
-         background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:2000;">
-      <img id="lightbox-img" src="" alt="" style="max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
-    </div>
-  
-    <script>
+  <!-- 世界地图 SVG -->
+  <div id="map-container" style="position:relative; width:100%; max-width:1000px; margin:auto;">
+    <svg viewBox="0 0 2000 1001" style="width:100%; height:auto;">
+      <!-- 世界地图路径（简化版） -->
+      <path d="M100,300 L200,320 L300,310 L400,350 L500,330 L600,370 L700,360 L800,390 
+               L900,370 L1000,400 L1100,380 L1200,420 L1300,400 L1400,450 L1500,430 
+               L1600,470 L1700,450 L1800,490 L1900,470 L2000,500" 
+            fill="#cce5ff" stroke="#888" stroke-width="0.5"></path>
+
+      <!-- 城市标记 -->
+      <circle class="map-point" cx="1210" cy="360" r="8" fill="#8b5cf6" data-img="img/beijing.jpg" title="Beijing"></circle>
+      <circle class="map-point" cx="1240" cy="400" r="8" fill="#8b5cf6" data-img="img/shanghai.jpg" title="Shanghai"></circle>
+      <circle class="map-point" cx="1140" cy="390" r="8" data-img="img/yinchuan.jpg" title="Yinchuan"></circle>
+      <circle class="map-point" cx="300" cy="450" r="8" fill="#8b5cf6" data-img="img/losangeles.jpg" title="Los Angeles"></circle>
+      <circle class="map-point" cx="1330" cy="350" r="8" fill="#8b5cf6" data-img="img/seoul.jpg" title="Seoul"></circle>
+      <circle class="map-point" cx="1380" cy="400" r="8" fill="#8b5cf6" data-img="img/tokyo.jpg" title="Tokyo"></circle>
+    </svg>
+  </div>
+
+  <!-- 弹窗 -->
+  <div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+       background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:2000;">
+    <img id="lightbox-img" src="" alt="" style="max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
       const points = document.querySelectorAll(".map-point");
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img");
-  
+
       points.forEach(pt => {
         pt.style.cursor = "pointer";
         pt.addEventListener("click", () => {
@@ -455,13 +453,14 @@ document.addEventListener('DOMContentLoaded', () => {
           lightbox.style.display = "flex";
         });
       });
-  
+
       lightbox.addEventListener("click", () => {
         lightbox.style.display = "none";
         lightboxImg.src = "";
       });
-    </script>
-  </section>
+    });
+  </script>
+</section>
 
 
   <!-- Contact -->
