@@ -3,6 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>News Hover Demo</title>
+<style>
+  body { font-family: Arial; padding: 40px; font-size: 14px; position: relative; }
+  h2 { text-align: center; font-size: 1.6em; margin-bottom: 20px; }
+  ul { list-style: none; padding: 0; }
+  li { margin-bottom: 12px; cursor: pointer; position: relative; }
+  #hover-image-container {
+    position: absolute;
+    display: none;
+    pointer-events: none;
+    z-index: 100;
+  }
+  #hover-image-container img {
+    width: 150px; height: 100px; object-fit: cover;
+    border: 1px solid #ddd; border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+</style>
+
   <title>Boyuan Jia — Academic Homepage</title>
   <style>
     body {
@@ -109,10 +128,9 @@
       <a href="https://github.com/yourgithub" target="_blank">💻 GitHub</a>
     </p>
   </section>
-
-<section class="section" id="news">
+<section id="news">
   <h2>News</h2>
-  <ul class="news-list">
+  <ul>
     <li class="news-item" data-img="dc.jpg">
       Nov 2025: Presented my research ASIS&T 2025 in Washington DC 🎉.
     </li>
@@ -124,11 +142,30 @@
     </li>
   </ul>
 
-  <!-- Hover Image Container -->
   <div id="hover-image-container">
     <img id="hover-image" src="" alt="News Image">
   </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const items = document.querySelectorAll('.news-item');
+  const hoverContainer = document.getElementById('hover-image-container');
+  const hoverImage = document.getElementById('hover-image');
+
+  items.forEach(item => {
+    item.addEventListener('mousemove', e => {
+      hoverImage.src = item.dataset.img;
+      hoverContainer.style.display = 'block';
+      hoverContainer.style.left = e.pageX + 15 + 'px';
+      hoverContainer.style.top = e.pageY + 15 + 'px';
+    });
+    item.addEventListener('mouseleave', () => {
+      hoverContainer.style.display = 'none';
+    });
+  });
+});
+</script>
 
 <style>
   /* 基本样式 */
